@@ -1,15 +1,18 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
     <link rel="stylesheet" href="style.css">
-    <title>Hello, world!</title>
+    
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="js/jquery-ui.css">
+    <title>CRUD-Age</title>
   </head>
   <body>
     
@@ -17,7 +20,7 @@
 
     <div class = "card">
         <div class="search">
-          <input type="text" placeholder="Search Members Here" id="member_search" onkeyup="filterTask();">
+            <input type="text" placeholder="Search Members Here" id="member_search" onkeyup="filterTask();">
             <button class="btn btn-primary" data-toggle="modal" 
             data-target="#member-form-modal"> Add new</button>
         </div>
@@ -59,7 +62,7 @@
 
               
               <div class="modal-body">                   
-                  <form >
+                  <form onsubmit="addTask(); return false;" autocomplete="off">
                       <label class="validation-error hide" id="NameValidatonError">This fiels is required</label>
 
                       <div class="form-control">
@@ -81,7 +84,7 @@
           
                       <div class="form-control">
                         <label for="">Date Of Birth <span>*</span> </label>
-                        <input type="date" class="task" id="age" placeholder="Enter Date of birth" required/>                 
+                        <input type="text" class="task" id="age" placeholder="Enter Date of birth" required/>                 
                       </div>
           
                       <div class="form-control">
@@ -89,22 +92,69 @@
                         <input type="text" class="task" id="designation" placeholder="Enter designation" required/>
                       </div>
 
+                      <div class="form-control">
+                        <button type="submit" id="create-btn" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                      </div> 
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- edit modal -->
+    <div class="modal fade" id="editmodal" >
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <h4 class="modal-title" id="editmodal">Insert Member Information</h4>
+              </div>
+
+              
+              <div class="modal-body">                   
+                  <form onsubmit="updateInfo(); return false;">
+                      <label class="validation-error hide" id="NameValidatonError">This fiels is required</label>
+
+                      <div class="form-control">
+                        <label for="">Firstname <span>*</span></label>
+                        <input type="text" class="task" id="edit_firstname" placeholder="Enter your firstname" required/>              
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Lastname <span>*</span></label>
+                        <input type="text" class="task" id="edit_lastname" placeholder="Enter your lastname" required/>                          
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Email <span>*</span></label>
+                        <input type="text" class="task" id="edit_email" placeholder="Enter email" required/>                            
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Date Of Birth <span>*</span> </label>
+                        <input type="text" class="task" id="edit_age" placeholder="Enter Date of birth" required/>                 
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Designation <span>*</span></label>
+                        <input type="text" class="task" id="edit_designation" placeholder="Enter designation" required/>
+                      </div>
+
                       <div class="form-group">
                         <input type="hidden" class="form-control" id="member_id">
                       </div>                    
           
                       <div class="form-control">
-                        <button type="submit" id="create-btn" class="btn btn-primary" onclick="addTask();">Create</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        <button id="update-btn" class="btn btn-success" style="display: none;" onclick="updateInfo();">Update</button> 
-                        
+                        <button id="update-btn" class="btn btn-success">Update</button>                         
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>                       
                       </div>                       
                   </form>
                 </div>
             </div>
         </div>
     </div>
- 
+    <!-- edit modal -->
 
     <!-- delete modal -->
     <div class="modal fade" id="deleteDialog"  >
@@ -123,10 +173,8 @@
               </div>
 
               <div class="modal-footer">
-
                 <button type="button" class="btn btn-danger" onclick="deleteMemberData()">Yes</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-
               </div>
             </div>
         </div>
@@ -135,9 +183,10 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="script.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="filter.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
   </body>
 </html>

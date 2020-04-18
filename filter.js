@@ -10,17 +10,36 @@ var deleteId = document.getElementById("deleted-member-id");
 var editId = document.getElementById("member_id");
 
 $(document).ready(function () {
-
+    var age = "";
+    var m = "";
     $('#age').datepicker({
+        onSelect: function (value, ui) {
+            var today = new Date();
+            age = today.getFullYear() - ui.selectedYear;
+            m = today.getMonth() - ui.selectedMonth;
+            if (m < 0 || (m === 0 && today.getDate() < ui.selectedDate)) {
+                age--;
+            }
+            $('#age').val(age);
+        },
         changeMonth: true,
         changeYear: true,
-        yearRange: '1950:2020',
+        yearRange: '1975:2020',
     });
 
     $('#edit_age').datepicker({
+        onSelect: function (value, ui) {
+            var today = new Date();
+            age = today.getFullYear() - ui.selectedYear;
+            m = today.getMonth() - ui.selectedMonth;
+            if (m < 0 || (m == 0 && today.getDate() < ui.selectedDate)) {
+                age--;
+            }
+            $('#edit_age').val(age);
+        },
         changeMonth: true,
         changeYear: true,
-        yearRange: '1950:2020',
+        yearRange: '1975:2020',
     });
 
 })
@@ -113,7 +132,7 @@ function addTask(){
   cell2.innerHTML = firstname.value;
   cell3.innerHTML = lastname.value;
   cell4.innerHTML = email.value;
-  cell5.innerHTML = calculateAge(age.value); 
+  cell5.innerHTML = age.value;  //$('#age').val(age);
   cell6.innerHTML = designation.value;
   var guid = id;
  
@@ -154,10 +173,7 @@ function addDataInLocalStorage(newTask){
         tasks = JSON.parse(localStorage.getItem('tasks'));  
     }
     newTask.id = guid();
-    tasks.push(newTask); 
-
-    // newTask.age = calculateAge(newTask.age);
-    // tasks.push(newTask);
+    tasks.push(newTask);
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
@@ -197,7 +213,7 @@ function getTasks(){
         cell2.innerHTML = obj.firstname;
         cell3.innerHTML = obj.lastname;
         cell4.innerHTML = obj.email;
-        cell5.innerHTML = calculateAge(obj.age);
+        cell5.innerHTML = obj.age;
         cell6.innerHTML = obj.designation;  
         var guid = obj.id;  
         cell7.innerHTML = '<button class="btn btn-sm btn-default" onclick="viewModal('+ guid +');">View</button>' +
@@ -208,17 +224,6 @@ function getTasks(){
 }
 }
 
-function calculateAge(date){
-    var today = new Date(date);
-    var today = new Date();
-    var birthDate = new Date(date);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    return age;
-}
 
 function showDeleteModal(id) {
     $('#deleted-member-id').val(id);
