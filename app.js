@@ -42,6 +42,21 @@ $(document).ready(function () {
         yearRange: '1975:2020',
     });
 
+    $('#clone_age').datepicker({
+        onSelect: function (value, ui) {
+            var today = new Date();
+            age = today.getFullYear() - ui.selectedYear;
+            m = today.getMonth() - ui.selectedMonth;
+            if (m < 0 || (m == 0 && today.getDate() < ui.selectedDate)) {
+                age--;
+            }
+            $('#clone_age').val(age);
+        },
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1975:2020',
+    });
+
 })
 /**
  * Generating unique ID for new Input
@@ -109,6 +124,7 @@ function filterTask() {
         var guid = item.id;
         cell7.innerHTML ='<button class="btn btn-sm btn-default" onclick="viewModal('+ guid +');">View</button> ' +
                 '<button class="btn btn-sm btn-primary" onclick="editModal(' + guid + ')">Edit</button> ' +
+                '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')">Clone</button> ' +
                 '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')">Delete</button>';
             
     })
@@ -138,6 +154,7 @@ function addTask(){
  
   cell7.innerHTML ='<button class="btn btn-sm btn-default" onclick="viewModal('+ guid +');">View</button> ' +
         '<button class="btn btn-sm btn-primary" onclick="editModal(' + guid + ')">Edit</button> ' +
+        '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')">Clone</button> ' +
         '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')">Delete</button>';
    
    var obj = {   
@@ -218,6 +235,7 @@ function getTasks(){
         var guid = obj.id;  
         cell7.innerHTML = '<button class="btn btn-sm btn-default" onclick="viewModal('+ guid +');">View</button>' +
         '<button class="btn btn-sm btn-primary" onclick="editModal('+ guid +')" >Edit</button> ' +
+        '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')">Clone</button> ' +
         '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')">Delete</button>';   
     
     });
@@ -307,9 +325,6 @@ function viewModal(id){
 
 function editModal(id){
 
-    // makeFieldDisabled(false);
-    // alterButtons('none', null);
-
     var tasks;
     if(localStorage.getItem('tasks') === null){
         tasks = [] ;
@@ -322,12 +337,6 @@ function editModal(id){
         return item.id == id;
     })
 
-    // firstname.value = member.firstname;
-    // lastname.value = member.lastname;
-    // email.value = member.email;
-    // age.value = member.age;
-    // designation.value = member.designation;
-    // editId.value = id;
     $('#edit_firstname').val(member.firstname);
     $('#edit_lastname').val(member.lastname);
     $('#edit_email').val(member.email);
@@ -363,4 +372,78 @@ function updateInfo(){
     $("#table").find("tr:not(:first)").remove();
     getTasks();
     $('#editmodal').modal('hide')
+}
+
+function cloneModal(id){
+
+    var tasks;
+    if(localStorage.getItem('tasks') === null){
+        tasks = [] ;
+    }
+    else{
+        tasks = JSON.parse(localStorage.getItem('tasks'));  
+    }
+    
+    var member = tasks.find(function (item) {
+        return item.id == id;
+    })
+
+    $('#clone_firstname').val(member.firstname);
+    $('#clone_lastname').val(member.lastname);
+    $('#clone_email').val(member.email);
+    $('#clone_age').val(member.age);
+    $('#clone_designation').val(member.designation);
+    $('#clone_member_id').val(id);
+    
+    $('#clonemodal').modal();
+}
+
+function cloneInfo(){
+    var tasks;
+    if(localStorage.getItem('tasks') === null){
+        tasks = [] ;
+    }
+    else{
+        tasks = JSON.parse(localStorage.getItem('tasks'));  
+    }
+    var id = $('#clone_member_id').val();
+    
+    var table   = document.querySelector('table tbody');
+    newRow      = table.insertRow(table.length);
+  
+  
+    cell1 = newRow.insertCell(0);
+    cell2 = newRow.insertCell(1);
+    cell3 = newRow.insertCell(2);
+    cell4 = newRow.insertCell(3);
+    cell5 = newRow.insertCell(4);
+    cell6 = newRow.insertCell(5);
+    cell7 = newRow.insertCell(6);
+  
+  
+    cell1.innerHTML = getTotalRowOfTable();
+    cell2.innerHTML = clone_firstname.value;
+    cell3.innerHTML = clone_lastname.value;
+    cell4.innerHTML = clone_email.value;
+    cell5.innerHTML = clone_age.value;  //$('#age').val(age);
+    cell6.innerHTML = clone_designation.value;
+    var guid = id;
+   
+    cell7.innerHTML ='<button class="btn btn-sm btn-default" onclick="viewModal('+ guid +');">View</button> ' +
+          '<button class="btn btn-sm btn-primary" onclick="editModal(' + guid + ')">Edit</button> ' +
+          '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')">Clone</button> ' +
+          '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')">Delete</button>';
+     
+     var obj = {   
+          firstname  : clone_firstname.value,
+          lastname   : clone_lastname.value,
+          email      : clone_email.value,
+          age        : clone_age.value,
+          designation: clone_designation.value,       
+      };
+    
+      addDataInLocalStorage(obj);
+      clearForm();
+      
+    $('#clonemodal').modal('hide')
 }
