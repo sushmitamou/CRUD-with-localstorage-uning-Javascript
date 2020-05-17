@@ -185,3 +185,99 @@ label.validation-error{
   color: #fff !important;
 }
 /* profile card */
+
+
+
+@media only screen and (max-width: 1200px){
+  .title{
+      margin: 4% 12%;
+  }
+  .allCards{
+    margin: 0% 0;
+}
+  .allCards .single-card{
+    width: 290px !important;
+    margin: 2% 1%;
+}
+
+.allCards .single-card button{
+  font-size: 14px;
+  margin: 30px 0 13px 15px;
+  padding: 5px;
+  border-radius: 5px;
+
+}
+}
+
+@media only screen and (max-width: 991px){
+  
+.title{
+  margin: 4% -6%;
+}
+
+#add-member{
+  float: right;
+  margin-top: -8.5%;
+  margin-right: -8%;
+  color: #fff;
+}
+.secondary ul{
+  margin-left: -8%;
+  margin-top: 3.5%;
+}
+
+.allCards .single-card{
+  width: 310px !important;
+  margin: 2% 2.5%;
+}
+}
+
+@media only screen and (max-width: 940px){
+  .primary img{
+    height: 37px !important;
+    width: 80px !important;
+    margin-left: 35%;
+  }
+}
+
+@media only screen and (max-width: 940px){
+  .title{
+    margin: 4% 0%;
+}
+  #add-member{
+    float: right;
+    margin: -2% 47.5% 1% 0;
+    color: #fff;
+}
+.allCards .single-card button{
+
+  font-size: 16px;
+  margin: 30px 0 10px 26px;
+}
+
+}
+
+@media only screen and (max-width: 767px){
+  .primary img{
+    margin-left: 80% !important;
+  }
+  .title{
+    color: rgb(25, 80, 168);
+    margin: 6% -11%;
+    font-size: 25px;
+  }
+  .allCards{
+    margin: 5% 10%;
+
+  }
+  .allCards .single-card{
+    width: 400px !important;
+    margin: 5% 1% !important;
+  }
+
+  .allCards .single-card button{
+    margin-top: 2%;
+    font-size: 16px;
+    margin-left: 12%;
+  }
+}

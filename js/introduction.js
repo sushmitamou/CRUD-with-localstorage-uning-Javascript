@@ -306,7 +306,7 @@ function getTasks(){
             view.style.color = '#fff';
             view.appendChild(icon);
             // var guid = obj.id;
-            // view.addEventListener('click', viewModal(guid));
+            // icon.addEventListener('click', viewModal(guid));
 
             var edit = document.createElement('button');
             edit.className = "buttons";
