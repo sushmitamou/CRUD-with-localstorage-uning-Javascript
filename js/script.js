@@ -7,7 +7,10 @@ var designation = document.getElementById("designation");
 var tablerows = document.getElementById("tablerows");
 var filter = document.getElementById("filter");
 var deleteId = document.getElementById("deleted-member-id");
+var clearId = document.getElementById("clear-member-id");
 var editId = document.getElementById("member_id");
+var clear = document.getElementById("clear");
+var selectedId = $('#table input:checked');
 
 $(document).ready(function () {
     var age = "";
@@ -71,6 +74,8 @@ loadEventListeners();
 function loadEventListeners(){
     //show data in UI
     document.addEventListener('DOMContentLoaded', getTasks);
+    //clear all from ls
+    //clear.addEventListener('click', clearAll);
 }
 
 function filterTask() {
@@ -114,15 +119,15 @@ function filterTask() {
         cell6 = newRow.insertCell(5);
         cell7 = newRow.insertCell(6);
 
-
-        cell1.innerHTML = index+1;
-        cell2.innerHTML = item.firstname;
-        cell3.innerHTML = item.lastname;
-        cell4.innerHTML = item.email;
+        cell1.innerHTML = '<input type="checkbox" class="check" id="child">';
+        cell2.innerHTML = index+1;
+        cell3.innerHTML = item.firstname + item.lastname;
+        cell4.innerHTML = item.designation;
         cell5.innerHTML = item.age;
-        cell6.innerHTML = item.designation; 
+        cell6.innerHTML = item.email;
+         
         var guid = item.id;
-        cell7.innerHTML ='<button class="btn btn-sm btn-default" onclick="viewModal('+ guid +');">View</button> ' +
+        cell7.innerHTML ='<button class="btn btn-sm btn-light" style="margin-right:5px" onclick="viewModal('+ guid +');">View</button> ' +
                 '<button class="btn btn-sm btn-primary" onclick="editModal(' + guid + ')">Edit</button> ' +
                 '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')">Clone</button> ' +
                 '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')">Delete</button>';
@@ -144,25 +149,25 @@ function addTask(){
   cell7 = newRow.insertCell(6);
 
 
-  cell1.innerHTML = getTotalRowOfTable();
-  cell2.innerHTML = firstname.value;
-  cell3.innerHTML = lastname.value;
-  cell4.innerHTML = email.value;
-  cell5.innerHTML = age.value;  //$('#age').val(age);
-  cell6.innerHTML = designation.value;
+  cell1.innerHTML = '<input type="checkbox" class="check" id="child">';
+  cell2.innerHTML = getTotalRowOfTable();
+  cell3.innerHTML = firstname.value + lastname.value;
+  cell4.innerHTML = designation.value;
+  cell5.innerHTML = age.value;
+  cell6.innerHTML = email.value;  //$('#age').val(age);
+
   var guid = id;
  
-  cell7.innerHTML ='<button class="btn btn-sm btn-default" onclick="viewModal('+ guid +');">View</button> ' +
+  cell7.innerHTML ='<button class="btn btn-sm btn-info" style="margin-right:5px" onclick="viewModal('+ guid +');">View</button> ' +
         '<button class="btn btn-sm btn-primary" onclick="editModal(' + guid + ')">Edit</button> ' +
         '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')">Clone</button> ' +
         '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')">Delete</button>';
    
    var obj = {   
-        firstname  : firstname.value,
-        lastname   : lastname.value,
-        email      : email.value,
+        fullname   : firstname.value + lastname.value,
+        designation: designation.value,  
         age        : age.value,
-        designation: designation.value,       
+        email      : email.value,     
     };
     
     //console.log(obj);
@@ -189,6 +194,7 @@ function addDataInLocalStorage(newTask){
     else{
         tasks = JSON.parse(localStorage.getItem('tasks'));  
     }
+
     newTask.id = guid();
     tasks.push(newTask);
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -226,14 +232,15 @@ function getTasks(){
         cell6 = newRow.insertCell(5);
         cell7 = newRow.insertCell(6);
 
-        cell1.innerHTML = getTotalRowOfTable();
-        cell2.innerHTML = obj.firstname;
-        cell3.innerHTML = obj.lastname;
-        cell4.innerHTML = obj.email;
+        cell1.innerHTML = '<input type="checkbox" class="check" id="child">';
+        cell2.innerHTML = getTotalRowOfTable();
+        cell3.innerHTML = obj.firstname + obj.lastname;
+        cell4.innerHTML = obj.designation; 
         cell5.innerHTML = obj.age;
-        cell6.innerHTML = obj.designation;  
+        cell6.innerHTML = obj.email;
+         
         var guid = obj.id;  
-        cell7.innerHTML = '<button class="btn btn-sm btn-default" onclick="viewModal('+ guid +');">View</button>' +
+        cell7.innerHTML = '<button class="btn btn-sm btn-info" style="margin-right:5px" onclick="viewModal('+ guid +');">View</button>' +
         '<button class="btn btn-sm btn-primary" onclick="editModal('+ guid +')" >Edit</button> ' +
         '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')">Clone</button> ' +
         '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')">Delete</button>';   
@@ -246,11 +253,11 @@ function getTasks(){
 function showDeleteModal(id) {
     $('#deleted-member-id').val(id);
 
-    $('#deleteDialog').modal();
-   
+    $('#deleteDialog').modal();  
 }
 
 function deleteMemberData() {
+
     var id = deleteId.value;
     var data = localStorage.getItem('tasks');
     var storageUsers = JSON.parse(data);
@@ -316,9 +323,10 @@ function viewModal(id){
 
     firstname.value = member.firstname;
     lastname.value = member.lastname;
-    email.value = member.email;
-    age.value = member.age;
     designation.value = member.designation;
+    age.value = member.age;
+    email.value = member.email;
+
     
     $('#member-form-modal').modal();
 }
@@ -362,9 +370,9 @@ function updateInfo(){
     })
     member.firstname = edit_firstname.value ;
     member.lastname = edit_lastname.value;
-    member.email = edit_email.value;
-    member.age = edit_age.value;
     member.designation =  edit_designation.value;
+    member.age = edit_age.value;
+    member.email = edit_email.value;
 
     var data = JSON.stringify(tasks);
     localStorage.setItem("tasks", data);
@@ -420,30 +428,72 @@ function cloneInfo(){
     cell6 = newRow.insertCell(5);
     cell7 = newRow.insertCell(6);
   
-  
-    cell1.innerHTML = getTotalRowOfTable();
-    cell2.innerHTML = clone_firstname.value;
-    cell3.innerHTML = clone_lastname.value;
-    cell4.innerHTML = clone_email.value;
-    cell5.innerHTML = clone_age.value;  //$('#age').val(age);
-    cell6.innerHTML = clone_designation.value;
+    cell1.innerHTML = '<input type="checkbox" class="check" id="child">';
+    cell2.innerHTML = getTotalRowOfTable();
+    cell3.innerHTML = clone_firstname.value + clone_lastname.value;
+    cell4.innerHTML = clone_designation.value;
+    cell5.innerHTML = clone_age.value;
+    cell6.innerHTML = clone_email.value;  //$('#age').val(age);
+
     var guid = id;
    
-    cell7.innerHTML ='<button class="btn btn-sm btn-default" onclick="viewModal('+ guid +');">View</button> ' +
+    cell7.innerHTML ='<button class="btn btn-sm btn-info" style="margin-right:5px" onclick="viewModal('+ guid +');">View</button> ' +
           '<button class="btn btn-sm btn-primary" onclick="editModal(' + guid + ')">Edit</button> ' +
           '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')">Clone</button> ' +
           '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')">Delete</button>';
      
      var obj = {   
-          firstname  : clone_firstname.value,
-          lastname   : clone_lastname.value,
-          email      : clone_email.value,
+          fullname   : clone_firstname.value + clone_lastname.value,
+          designation: clone_designation.value, 
           age        : clone_age.value,
-          designation: clone_designation.value,       
+          email      : clone_email.value,      
       };
     
       addDataInLocalStorage(obj);
       clearForm();
       
-    $('#clonemodal').modal('hide')
+    $('#clonemodal').modal('hide');
+}
+
+
+function SelectAll(){
+    var parent = document.getElementById('parent');
+    var input = document.getElementsByTagName('input');
+
+    if(parent.checked === true){
+        for (var i = 0; i<input.length; i++){
+            if(input[i].type == "checkbox" && input[i].checked == false && input[i].id == "child"){
+                input[i].checked = true;
+            }
+        }
+    }
+
+    if(parent.checked === false){
+        for (var i = 0; i<input.length; i++){
+            if(input[i].type == "checkbox" && input[i].checked == true && input[i].id == "child"){
+                input[i].checked = false;
+            }
+        }
+    }
+}
+
+
+function showSelectedRows(id) {
+    $('#clear-member-id').val(id);
+    
+    //$('#table input:checked').val(id);
+    //debugger;
+    $('#clearDialog').modal();  
+}
+function deleteSelectedRow(){
+    var check = document.getElementsByClassName('check');
+    var data = localStorage.getItem('tasks');
+    var storageUsers = JSON.parse(data);
+    var newData = [];
+    newData = storageUsers.filter(function (element, index) {
+        return element.id != id;
+    });
+    console.log(newData);
+    debugger;
+   
 }

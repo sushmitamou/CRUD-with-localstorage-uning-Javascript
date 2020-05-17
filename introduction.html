@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/others.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <script src="js/jquery.js"></script> 
+    <script src="js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="js/jquery-ui.css"> 
+
+    <title>CRUD-Age</title>
+  </head>
+
+
+  <!-- include header using jquery-->
+  <!-- <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+
+<script>
+  $(function(){
+    $("#header").load("header.html");
+  });
+</script> -->
+
+
+  <body>    
+        <!-- <div w3-include-html="header.html"></div> -->
+    <div class="navbar">
+        <div class="background"></div>
+            <div class="primary">
+                <img src="image/hand.png" alt="logo" style="height: 50px; width: 130px;">
+            </div>
+            <div class="secondary">
+              <ul>
+                <li><a href="index.html" id="home" onselect="home()";>Home</a></li>
+                <li><a href="info.html" id="info" onchange="info()"; >Members-Info</a></li>
+                <li><a href="introduction.html" id="about" onchange="intro()";>Introduction</a></li>
+                <li><a href="about.html" id="about" onchange="about()";>About</a></li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h3 class="title"> SMALL <span>INTRODUCTION</span> ABOUT OUR <span>TEAM</span> MEMBERS </h3>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#member-form-modal" id="add-member">
+            <i class="fa fa-plus"></i>
+        </button>
+
+        <!-- bootstrap card -->
+        <div  id="allCards" class="allCards">
+            <!-- <div id="single-card" class="single-card">
+
+                <div class="image">
+                    <img class="card-img-top" src="image/about-me.jpg" alt="Card image cap">
+                </div>  
+                  <div class="card-body">
+                    <h4 class="fullname" id="fullname">$ <span></span></h4>
+                    <p class="occupation" ><i class="fa fa-briefcase" aria-hidden="true"></i><span></span></p>
+                    <p class="email"><i class="fas fa-envelope-square"></i><span></span></p>
+                    <p class="age"><i class="fa fa-child" aria-hidden="true"></i><span></span></p>
+                </div>
+            </div> -->
+        </div>
+        <!-- bootstrap card -->
+        <!-- <div class="card-warpper">
+            <div class="row">
+                <div class="col-3">
+                    <div class="card">
+                        <div class="pro-image">
+                            <img src="image/about-me.jpg" alt="">
+                        </div>
+                        <h4 class="fullname">Sushmita Paul</h4>
+                        <p class="occupation">Softwar Engineer</p>
+                        <p class="email">psushmita87@gmail.com</p>
+                        <p class="age">Age : 24</p>
+                        <p class="about">I am a slow lerner...but i want to know more & more about programming</p>
+                    </div>
+                </div>
+                <div class="col">col</div>
+                <div class="col">col</div>
+                <div class="col">col</div>
+              </div>
+
+              <div class="card">
+                <div class="pro-image">
+                    <img src="image/about-me.jpg" alt="">
+                </div>
+                <h4 class="fullname">Sushmita Paul</h4>
+                <p class="occupation">Softwar Engineer</p>
+                <p class="email">psushmita87@gmail.com</p>
+                <p class="age">Age : 24</p>
+                <p class="about">I am a slow lerner...but i want to know more & more about programming</p>
+            </div> 
+        </div> -->
+    </div>
+        
+
+      <!-- form using modal-->
+    <div class="modal fade"  id="member-form-modal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <h4 class="modal-title">Add Member Information</h4>
+              </div>
+              
+              <div class="modal-body">                   
+                  <form onsubmit="addTask(); return false;" autocomplete="off">
+                      <label class="validation-error hide" id="NameValidatonError">This fiels is required</label>
+
+                      <div class="form-control">
+                        <label for="">Fullname <span>*</span></label>
+                        <input type="text" class="task" 
+                        id="fullname" placeholder="Enter your fullname" required/>              
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Email <span>*</span></label>
+                        <input type="text" class="task" id="email" placeholder="Enter email" required/>                            
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Date Of Birth <span>*</span> </label>
+                        <input type="text" class="task" id="age" placeholder="Enter Date of birth" required/>                 
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Designation <span>*</span></label>
+                        <input type="text" class="task" id="designation" placeholder="Enter designation" required/>
+                      </div>
+
+                      <div class="form-control">
+                        <button type="submit" id="create-btn" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                      </div> 
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- view modal -->
+    <div class="modal fade" id="view-form-modal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <h4 class="modal-title">View Member Information</h4>
+              </div>
+              
+              <div class="modal-body">                   
+                  <form autocomplete="off">
+                      <label class="validation-error hide" id="NameValidatonError">This fiels is required</label>
+
+                      <div class="form-control">
+                        <label for="">Fullname <span>*</span></label>
+                        <input type="text" class="task" 
+                        id="view_fullname" placeholder="Enter your fullname" required/>              
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Email <span>*</span></label>
+                        <input type="text" class="task" id="view_email" placeholder="Enter email" required/>                            
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Date Of Birth <span>*</span> </label>
+                        <input type="text" class="task" id="view_age" placeholder="Enter Date of birth" required/>                 
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Designation <span>*</span></label>
+                        <input type="text" class="task" id="view_designation" placeholder="Enter designation" required/>
+                      </div>
+
+                      <div class="form-control">
+                        <button type="submit" id="create-btn" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                      </div> 
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- view modal -->
+
+    <!-- edit modal -->
+    <div class="modal fade" id="clonemodal" >
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <h4 class="modal-title" id="clonemodal">Clone Member Information</h4>
+              </div>
+           
+              <div class="modal-body">                   
+                  <form onsubmit="cloneInfo(); return false;">
+                      <label class="validation-error hide" id="NameValidatonError">This fiels is required</label>
+
+                      <div class="form-control">
+                        <label for="">Fullname <span>*</span></label>
+                        <input type="text" class="task" id="clone_fullname" placeholder="Enter your fullname" required/>              
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Email <span>*</span></label>
+                        <input type="text" class="task" id="clone_email" placeholder="Enter email" required/>                            
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Date Of Birth <span>*</span> </label>
+                        <input type="text" class="task" id="clone_age" placeholder="Enter Date of birth" required/>                 
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Designation <span>*</span></label>
+                        <input type="text" class="task" id="clone_designation" placeholder="Enter designation" required/>
+                      </div>
+
+                      <div class="form-group">
+                        <input type="hidden" class="form-control" id="clone_member_id">
+                      </div>                    
+          
+                      <div class="form-control">
+                        <button id="clone-btn" class="btn btn-success">Clone</button>                         
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>                       
+                      </div>                       
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- edit modal -->
+
+    <!-- clone modal -->
+    <div class="modal fade" id="editmodal" >
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+              <div class="modal-header">
+                  <h4 class="modal-title" id="editmodal">Insert Member Information</h4>
+              </div>
+
+              
+              <div class="modal-body">                   
+                  <form onsubmit="updateInfo(); return false;">
+                      <label class="validation-error hide" id="NameValidatonError">This fiels is required</label>
+
+                      <div class="form-control">
+                        <label for="">Fullname <span>*</span></label>
+                        <input type="text" class="task" id="edit_fullname" placeholder="Enter your fullname" required/>              
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Email <span>*</span></label>
+                        <input type="text" class="task" id="edit_email" placeholder="Enter email" required/>                            
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Date Of Birth <span>*</span> </label>
+                        <input type="text" class="task" id="edit_age" placeholder="Enter Date of birth" required/>                 
+                      </div>
+          
+                      <div class="form-control">
+                        <label for="">Designation <span>*</span></label>
+                        <input type="text" class="task" id="edit_designation" placeholder="Enter designation" required/>
+                      </div>
+
+                      <div class="form-group">
+                        <input type="hidden" class="form-control" id="member_id">
+                      </div>                    
+          
+                      <div class="form-control">
+                        <button id="update-btn" class="btn btn-primary">Update</button>                         
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>                       
+                      </div>                       
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- clone modal -->
+
+    <!-- delete modal -->
+    <div class="modal fade" id="deleteDialog"  >
+      <div class="modal-dialog">
+          <div class="modal-content" >
+
+              <div class="modal-header">
+                  <h4 class="modal-title">Warning!</h4>
+              </div>
+
+              <div class="modal-body">                   
+                  <strong >
+                    Are you sure to delete this member?
+                  </strong>
+                  <input type="hidden" id="deleted-member-id" value="">
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="deleteMemberData()">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- delete modal -->
+
+     <!-- clear modal -->
+     <div class="modal fade" id="clearDialog"  >
+      <div class="modal-dialog">
+          <div class="modal-content" >
+
+              <div class="modal-header">
+                  <h4 class="modal-title">Warning!</h4>
+              </div>
+
+              <div class="modal-body">                   
+                  <strong >
+                    Are you sure to remove this selected members?
+                  </strong>
+                  <input type="checkbox" id="clear-member-id" value="">
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="deleteSelectedRow()">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!-- clear modal -->
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/introduction.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+  </body>
+</html>

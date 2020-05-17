@@ -1,0 +1,286 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background:linear-gradient(rgba(69, 127, 252, 1), rgba(95, 148, 247, 0.8)),url('../image/background.jpg') center center no-repeat;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    font-size: 20px;
+}
+.navbar{
+    margin-top: 1%;
+}
+
+
+.primary img{
+    background: transparent;
+    height: 50px;
+    width: 130px;
+}
+.secondary ul{
+    display: flex;
+}
+.secondary ul li{
+    list-style: none;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+}
+.secondary ul li a{
+    color: #fff;
+    font-size: 20px;
+}
+.secondary ul li a:hover{
+    text-decoration: none !important;
+}
+.secondary ul li a:active{
+    border-bottom: 1px solid #fff;
+}
+
+.name{
+    margin-top: 12%;
+}
+.name h1{
+    color: #fff;
+    font-size: 60px;
+}
+.name p{
+    color: #fff;
+}
+.name .secondary .icon-circle-arrow-right{
+    font-size: 100px;
+    color: #fff;
+    float: right;
+    margin-top: -20%;
+}
+.name .secondary .icon-circle-arrow-right:hover{
+    text-decoration: none;
+}
+
+/* about page */
+.about-me{
+    margin-top: 3%;
+}
+.left img{
+    width: 36%;
+    height: auto;
+    border: 5px solid #fff;
+    border-radius: 50%;
+}
+.right{
+    width: 50%;
+    float: right;
+    color: #fff;
+    margin-top: -38%;
+}
+
+/* introduction page */
+
+
+
+/* style */
+form {
+    margin-top: 1%;
+  }
+.form-control {
+    margin-bottom: 40px !important;
+    padding-bottom: 15px !important;
+    border: none !important;
+  }
+  .form-control label{
+     margin-bottom: 0%;
+      border: none!important;
+      color: #444;
+      font-weight: 600;
+  }
+  .form-control label span{
+    color: red;
+    font-weight: bold;
+  }
+  .form-control input{
+    width: 100% !important;
+    border: 2px solid #f0f0f0 !important;
+    margin-top: 1%;
+    padding-top: 1%;
+    border-radius: 5px;
+    padding-bottom: 1%;
+    padding-left: 2%;
+}
+
+label.validation-error{
+  color:   red;
+  margin-left: 10px;
+  font-weight: 400;
+}
+.hide{
+  display:none;
+}
+.form-control.success input {
+  border-color: rgb(5, 124, 51);
+}
+
+.form-control.error input {
+  border-color: #e74c3c;
+}
+
+.form-control small {
+  color: #e74c3c;
+  /* position: absolute; */
+  visibility: hidden;
+}
+
+.form-control.error small {
+ visibility: visible;
+}
+#clear{
+  margin-right: 5px;
+}
+
+/* introduction page */
+.heading h3{
+    color: #fff;
+    margin:2% 0 5% 25%;
+}
+
+/* .cards-wrapper{
+    width:90%;
+    display: flex;
+    justify-content: space-evenly ;
+    position: relative;
+    top: 32%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.card{
+    width: 260px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: transform .5s;
+}
+
+@keyframes cardAnim{
+   0% {opacity: 0}
+   100%{opacity: 1;} 
+}
+
+.card:nth-child(1){
+    animation: cardAnim 2s 3s backwards; 
+}
+.card:nth-child(2){
+    animation: cardAnim 2s 3.5s backwards;
+}
+.card:nth-child(3){
+    animation: cardAnim 2s 4s backwards;
+}
+
+
+.card:hover{
+    transform: scale(1.2);
+}
+.image-top{
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    clip-path: polygon(0 0, 100% 0, 100% 68%, 0 100%);
+}
+
+.profile-image{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: -60px;
+    position: absolute;
+    z-index: 10;
+    border: 8px solid #fff;
+    margin-bottom: 10px;
+}
+
+.fullname{
+    font-family: 'Ubuntu', scan-serif;
+    font-size: 22px;
+    color: #555;
+    margin-top: 30px !important;
+    object-fit: cover;
+}
+.job{
+    font-family: 'Montserrat', scan-serif;
+    color: #777;
+    font-weight: 300;
+}
+.about-me{
+    font-family: 'Josefin Sans', scan-serif;
+    font-size: 14px;
+    width: 90%;
+    margin: 15px 0;
+    font-style: italic;
+    color: #444;
+    text-align: center;
+}
+.card button{
+    width: 120px;
+    padding: 7px;
+    margin: 5px;
+    background-color: tomato;
+    border: none;
+    outline: none;
+    color: #eee;
+    border-radius: 25px;
+    font-family: 'Josefin Sans', sans-serif;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+}
+.card:hover button{
+    animation: buttonRotation 2s 1s linear;
+}
+
+@keyframes buttonRotation{
+    0%{transform: scale(1) rotateZ(0)}
+    5%{transform: scale(1.2) rotateZ(5deg)}
+    10%{transform: scale(1.2) rotateZ(-5deg)}
+    15%{transform: scale(1.2) rotateZ(5deg)}
+    20%{transform: scale(1.2) rotateZ(-5deg)}
+    25%{transform: scale(1.2) rotateZ(5deg)}
+    30%{transform: scale(1.2) rotateZ(-5deg)}
+    35%{transform: scale(1.2) rotateZ(5deg)}
+    40%{transform: scale(1.2) rotateZ(-5deg)}
+    45%{transform: scale(1.2) rotateZ(5deg)}
+    50%{transform: scale(1.2) rotateZ(-5deg)}
+    55%{transform: scale(1.2) rotateZ(5deg)}
+    60%{transform: scale(1.2) rotateZ(-5deg)}
+    65%{transform: scale(1.2) rotateZ(5deg)}
+    70%{transform: scale(1.2) rotateZ(-5deg)}
+    75%{transform: scale(1.2) rotateZ(5deg)}
+    80%{transform: scale(1.2) rotateZ(-5deg)}
+    85%{transform: scale(1.2) rotateZ(5deg)}
+    90%{transform: scale(1.2) rotateZ(-5deg)}
+    95%{transform: scale(1.2) rotateZ(5deg)}
+    100%{transform: scale(1.2) rotateZ(-5deg)}
+}
+.social-icons{
+    width: 150px;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px 0 10px 0;
+    border-top: 1px solid #999;
+    padding-top: 10px;
+}
+.social-icons i{
+    font-size: 18px;
+}
+.fa-facebook{
+    color: #3b5999;
+}
+.fa-youtube{
+    color: #cd201f;
+}
+.fa-twitter{
+    color: #3b5999;
+}
+.fa-google-plus-g{
+    color: #dd4b39;
+} */
