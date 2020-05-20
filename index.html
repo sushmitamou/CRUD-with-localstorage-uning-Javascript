@@ -12,25 +12,14 @@
     <script src="js/jquery-ui.js"></script>
 
     <link rel="stylesheet" href="js/jquery-ui.css">
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"> -->
     <title>CRUD-Age</title>
   </head>
 
 <body>
     <div class="container">
-        <div class="navbar">
-            <div class="primary">
-                <img src="image/hand.png" alt="logo">
-            </div>
-            <div class="secondary">
-                <ul>
-                    <li><a href="index.html" id="home" onselect="home()";>Home</a></li>
-                    <li><a href="info.html" id="info" onchange="info()"; >Members-Info</a></li>
-                    <li><a href="introduction.html" id="about" onchange="intro()";>Introduction</a></li>
-                    <li><a href="about.html" id="about" onchange="about()";>About</a></li>
-                </ul>
-            </div>
-        </div>
+        <div data-include-html="nav.html"></div>
 
         <div class="name">
             <div class="primary">
@@ -38,7 +27,7 @@
                 <P>This applicaton will provide all of the information about the members of <br> "Front End Team".</P>
             </div>
            <div class="secondary">
-                <a href="info.html"><i class="icon-circle-arrow-right"></i></a>
+                <a href="introduction.html"><i class="fa fa-arrow-circle-right"></i></a>
            </div>
         </div>
     </div>

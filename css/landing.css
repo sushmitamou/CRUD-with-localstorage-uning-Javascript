@@ -8,15 +8,39 @@ body{
     background-size: cover;
     font-size: 20px;
 }
+
+.navbar{
+    /* display: inline-block; */
+
+}
+.secondary{
+    margin-left: 57%;
+}
+/* navsection */
+ .mobile-nav-icon{
+    float: right;
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+}
+.mobile-nav-icon i{
+    color: #fff;
+    display: flex;
+}
+.pos-f-t{
+    display: none !important;
+  }
+
 .navbar{
     margin-top: 1%;
+    display: flex;
+
 }
-
-
 .primary img{
     background: transparent;
     height: 50px;
     width: 130px;
+    margin-left: -10%;
 }
 .secondary ul{
     display: flex;
@@ -38,6 +62,16 @@ body{
     border-bottom: 1px solid #fff;
 }
 
+.mobile-nav-icon .fa-bars{
+    display: none;
+    width: 27px;
+}
+
+.close .fa-times{
+    display: none;
+    width: 27px;
+}
+
 .name{
     margin-top: 12%;
 }
@@ -48,13 +82,13 @@ body{
 .name p{
     color: #fff;
 }
-.name .secondary .icon-circle-arrow-right{
+.name .secondary .fa-arrow-circle-right{
     font-size: 100px;
     color: #fff;
     float: right;
-    margin-top: -20%;
+    margin-top: -36%;
 }
-.name .secondary .icon-circle-arrow-right:hover{
+.name .secondary .fa-arrow-circle-right:hover{
     text-decoration: none;
 }
 
@@ -144,7 +178,17 @@ label.validation-error{
 }
 
 
+
 /* responsive */
+@media only screen and (max-width: 1199px){
+    .secondary ul{
+        width: 100%;
+        margin-left: 10%;
+        margin-top: -16%;
+    }
+}
+
+
 @media only screen and (max-width: 1040px){
     .about-me{
         margin-top: 10%;
@@ -167,6 +211,9 @@ label.validation-error{
 @media only screen and (max-width: 991px){
     .primary{
         margin-left: -12%;
+    }
+    .secondary ul{
+        margin-left: 6.5%;
     }
     .secondary{
         margin-right: -10%;
@@ -203,14 +250,17 @@ label.validation-error{
         height: 37px;
         width: 80px;
         margin-left: 35% !important;
+        margin-top: 2% !important;
     }
-    .secondary{
-        margin-right: -4%;
+    .secondary ul{
+       
+        margin-left: 7%;
+        margin-top: -15%;
     }
     .secondary i{
-        margin-right: 8%;
+        margin-right: 18%;
         font-size: 70px !important;
-        margin-top: -26% !important;
+        margin-top: -50% !important;
     }
     .left img{
         width: 35%;
@@ -240,10 +290,12 @@ label.validation-error{
 
 @media only screen and (max-width: 840px){
     .primary{
-        margin-left: -3%;
+        margin-left: -10%;
+        margin-top: 1%;
     }
-    .secondary{
-        margin-right: 1%;
+    .secondary ul{
+        margin-left: -15%;
+        margin-top: -16.5%;
     }
     
     .name{
@@ -254,13 +306,13 @@ label.validation-error{
         margin-bottom: 3%;
     }
     .name h1, p{
-        margin-left: 5%;
+        margin-left: 10%;
         
     }
     .secondary i{
-        margin-right: 3.5%;
-        font-size: 70px !important;
-        margin-top: -25% !important;
+        margin-right: 28%;
+        font-size: 60px !important;
+        margin-top: -47% !important;
     }
 
     /* about page */
@@ -275,6 +327,248 @@ label.validation-error{
         margin-right: 2% !important;
     }
 }
-@media only screen and (max-width: 840px){
+@media only screen and (max-width: 767px){
+
+    .primary img{
+        height: 37px;
+        width: 80px;
+        margin-left: -75% !important;
+        margin-top: -10%;
+    }
+    .secondary ul{
+        display: none;
+    }
     
+    .secondary ul{
+        float: left !important;
+        display: flex;
+        flex-direction: column;
+        margin-top: 0%;
+        display: none;
+        margin-left: -10%;
+    }
+    .secondary ul li{
+        float: left;
+        margin-top: -10%;
+    }
+
+    .secondary ul li a{
+        font-size: 18px;
+    }
+
+
+    .mobile-nav-icon .fa-bars{
+       display: flex;
+       float: right;
+        font-size: 26px !important;
+        margin-top: -5% !important;
+        margin-left: 550% !important;
+    }
+
+    .close .fa-times{
+        font-size: 26px !important;
+        color: #fff !important;
+        margin-left: 280% !important;
+        display: none;
+    }
+    .name{
+        margin-top: 25%;
+
+    }
+    .name h1, p{
+        margin-left: -5%;
+    }
+    .name .secondary .fa-arrow-circle-right{
+        font-size: 60px !important;
+        color: #fff;
+        float: right;
+        margin-top: -72% !important;
+        margin-left: -70% !important;
+    }
 }
+@media only screen and (max-width: 740px){
+    body{
+        padding: 0% 13%;
+    }
+    .name .secondary .fa-arrow-circle-right{
+        font-size: 55px !important;
+        margin-top: -80% !important;
+    }
+
+}
+
+@media only screen and (max-width: 740px){
+    body{
+        padding: 0% 10%;
+    }
+}
+@media only screen and (max-width: 668px){
+    body{
+        padding: 0% 13.5%;
+    }
+    .navbar{
+        margin-right: 1% !important;
+    }
+    .secondary ul{
+        margin-top: -30%;
+        margin-left: -30% !important;
+    }
+    .close .fa-times{
+        margin-left:  10% !important; 
+        margin-top: -200%;
+    }
+    .primary img{
+        height: 37px;
+        width: 80px;
+        margin-top: 10%;
+    }
+    .name p{
+        margin-right: -10%;
+        font-size: 16px;
+    }
+
+}
+
+@media only screen and (max-width: 630px){
+    body{
+        padding-right: 5% !important;
+    }
+    .name .secondary .fa-arrow-circle-right{
+        font-size: 55px !important;
+        margin-top: -68% !important;
+        margin-right: 15%;
+    }
+   .mobile-nav-icon{
+       margin-right: 20%;
+   }
+   .secondary ul{
+    margin-top: 0%;
+    margin-left: -60% !important;
+    }
+    .close{
+        margin-top: -14%;
+    }
+   
+}
+@media only screen and (max-width: 630px){
+    .name h1{
+        font-size: 30px;
+    }
+    .name p{
+        font-size: 16px;
+    }
+    .name .secondary .fa-arrow-circle-right{
+        font-size: 45px !important;
+    }
+    .mobile-nav-icon .fa-bars{
+        font-size: 22px !important;
+        margin-top: -50% !important;
+    }    
+
+}
+
+@media only screen and (max-width: 630px){
+    /* .secondary ul{
+        margin-top: -25%;
+    }
+    .close{
+        margin-top: -14%;
+    } */
+}
+@media only screen and (max-width: 510px){
+    .mobile-nav-icon .fa-bars{
+         font-size: 22px !important;
+         margin-top: -70% !important;
+         margin-left: 500% !important;
+     }
+}
+
+@media only screen and (max-width: 425px){
+    body{
+        padding-top: -15% !important;
+        padding: 0% !important;
+    }
+    .navbar img{
+      height: 30px !important;
+      width: 60px !important;
+      margin-top: 1% 0 0 -15% !important;
+    }
+    #navsection{
+      display: none !important;
+    }
+    .pos-f-t{
+      display:  flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+
+    }
+    .navbar-dark button{
+      float: right !important;
+      font-size: 15px !important;
+      color: #fff !important;
+      font-weight: bold !important;
+    }
+    .collapse{
+      width: 100% !important;
+    }
+    .p-4{
+      background: linear-gradient(rgb(44, 110, 252), rgba(63, 126, 243, 0.8))
+    }
+    ul{
+      margin-left: -8%;
+    }
+    ul li{
+      list-style: none;
+    }
+    ul li a{
+      color: #fff !important;
+      text-decoration: none;
+    }
+    .navbar-dark{
+      float: right !important;
+    }
+    .name{
+        margin-left: 17%;
+        margin-right: 5%;
+    }
+    .name .secondary .fa-arrow-circle-right{
+        font-size: 30px !important;
+        margin-right: 20% !important;
+    }
+    .name h1{
+        font-size: medium;
+        margin-bottom: 3%;
+    }
+    .name p{
+        font-size: medium;
+        line-height: 17px;
+    }
+
+    .left img{
+        width: 50%;
+        height: 50%;
+        margin: -9% 0% 0 25%;
+    }
+    .right{
+        width: 88%;
+    }
+  }
+  
+  @media only screen and (max-width: 320px){
+    .name .secondary .fa-arrow-circle-right{
+        font-size: 25px !important;
+        margin-right: 20% !important;
+        margin-top: -95% !important;
+
+    }
+    .name h1{
+        font-size: medium;
+        margin-bottom: 3%;
+    }
+    .name p{
+        font-size: small;
+        line-height: 17px;
+        margin-right: 20% !important;
+        text-align: justify !important;
+    }
+  }

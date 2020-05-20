@@ -77,6 +77,8 @@ function loadEventListeners(){
     //clear.addEventListener('click', clearAll);
 }
 
+
+
 function filterTask() {
     $("#table").find("tr:not(:first)").remove(); 
 
@@ -171,8 +173,6 @@ function addTask(){
     view.style.display = 'flex';
     view.style.color = '#fff';
     view.appendChild(icon);
-    // var guid = obj.id;
-    // view.addEventListener('click', viewModal(guid));
 
     var edit = document.createElement('button');
     edit.className = "buttons";
@@ -191,6 +191,7 @@ function addTask(){
     var icon = document.createElement('i');
     icon.className = "fa fa-trash";
     remove.appendChild(icon);
+
    // button view, edit, clone, delete
 
     // var buttons =  '<button class="btn btn-sm btn-info" style="margin-right:5px" onclick="viewModal('+ guid +');"><i class="fas fa-eye"></i></button> ' +
@@ -265,8 +266,11 @@ function getTasks(){
     } 
     else {
         $('.show-table-info').addClass('hide');
-        
-        tasks2.forEach(function(obj,index){
+
+        // Clear previous data
+        $("#allCards").find(".single-card").remove();
+
+        tasks2.forEach(function(obj,index) {
 
             var allCard = document.getElementById('allCards');
             var singleCard = document.createElement('div');
@@ -299,31 +303,43 @@ function getTasks(){
             email.appendChild(document.createTextNode(obj.email));
            
             var view = document.createElement('button');
+            var guid = obj.id;
+            view.addEventListener("click", function () {
+                viewModal(guid);
+            });
             view.className = "buttons";
+
             var icon = document.createElement('i');
             icon.className = "fa fa-eye";
             view.style.display = 'flex';
             view.style.color = '#fff';
             view.appendChild(icon);
-            // var guid = obj.id;
-            // icon.addEventListener('click', viewModal(guid));
 
             var edit = document.createElement('button');
             edit.className = "buttons";
             var icon = document.createElement('i');
             icon.className = "fa fa-user-edit";
+            edit.addEventListener("click", function () {
+                editModal(guid);
+            });
             edit.appendChild(icon);
 
             var clone = document.createElement('button');
             clone.className = "buttons";
             var icon = document.createElement('i');
             icon.className = "fa fa-copy";
+            clone.addEventListener("click", function () {
+                cloneModal(guid);
+            });
             clone.appendChild(icon);
 
             var remove = document.createElement('button');
             remove.className = "btn btn-sm btn-danger";
             var icon = document.createElement('i');
             icon.className = "fa fa-trash";
+            remove.addEventListener("click", function () {
+                showDeleteModal(guid);
+            });
             remove.appendChild(icon);
         
             singleCard.appendChild(fullname);
@@ -399,9 +415,6 @@ function alterButtons(createBtn, editBtn) {
 
 function viewModal(id){
 
-    makeFieldDisabled(true);
-    alterButtons('none', 'none');
-
     var tasks2;
 
     if(localStorage.getItem('tasks2') === null){
@@ -415,15 +428,15 @@ function viewModal(id){
         return item.id == id;
     })
 
-    fullname.value = member.fullname;
-    email.value = member.email;
-    age.value = member.age;
-    designation.value = member.designation;
+    view_fullname.value = member.fullname;
+    view_email.value = member.email;
+    view_age.value = member.age;
+    view_designation.value = member.designation;
     
     $('#view-form-modal').modal();
 }
 
-function editModal(id){
+function editModal(id) {
 
     var tasks2;
     if(localStorage.getItem('tasks2') === null){
@@ -495,7 +508,7 @@ function cloneModal(id){
     $('#clonemodal').modal();
 }
 
-function cloneInfo(){
+function cloneInfo() {
     var tasks2;
     if(localStorage.getItem('tasks2') === null){
         tasks2 = [] ;
@@ -511,14 +524,14 @@ function cloneInfo(){
     
     var fullname = document.createElement('h4');
     fullname.className = 'fullname';
-    fullname.appendChild(document.createTextNode(fullname.value));
+    fullname.appendChild(document.createTextNode(document.getElementById('clone_fullname').value));
    
     var occupation = document.createElement('p');
     occupation.className = 'occupation';
     var icon = document.createElement('i');
     icon.className = 'fa fa-briefcase';
     occupation.appendChild(icon);
-    occupation.appendChild(document.createTextNode(designation.value));
+    occupation.appendChild(document.createTextNode(document.getElementById('clone_designation').value));
     
 
     var age = document.createElement('p');
@@ -526,20 +539,51 @@ function cloneInfo(){
     var icon = document.createElement('i');
     icon.className = 'fa fa-child';
     age.appendChild(icon);
-    age.appendChild(document.createTextNode(age.value));
+    age.appendChild(document.createTextNode(document.getElementById('clone_age').value));
 
     var email = document.createElement('p');
     email.className = 'email';
     var icon = document.createElement('i');
     icon.className = "fa fa-envelope-square";
     email.appendChild(icon);
-    email.appendChild(document.createTextNode(email.value));
+    email.appendChild(document.createTextNode(document.getElementById('clone_email').value));
    
+            var view = document.createElement('button');
+            view.className = "buttons";
+
+            var icon = document.createElement('i');
+            icon.className = "fa fa-eye";
+            view.style.display = 'flex';
+            view.style.color = '#fff';
+            view.appendChild(icon);
+
+            var edit = document.createElement('button');
+            edit.className = "buttons";
+            var icon = document.createElement('i');
+            icon.className = "fa fa-user-edit";
+            edit.appendChild(icon);
+
+            var clone = document.createElement('button');
+            clone.className = "buttons";
+            var icon = document.createElement('i');
+            icon.className = "fa fa-copy";
+            clone.appendChild(icon);
+
+            var remove = document.createElement('button');
+            remove.className = "btn btn-sm btn-danger";
+            var icon = document.createElement('i');
+            icon.className = "fa fa-trash";
+            remove.appendChild(icon);
+
 
     singleCard.appendChild(fullname);
     singleCard.appendChild(occupation);
     singleCard.appendChild(age);
     singleCard.appendChild(email);
+    singleCard.appendChild(view);
+    singleCard.appendChild(edit);
+    singleCard.appendChild(clone);
+    singleCard.appendChild(remove);
     allCard.appendChild(singleCard);
     // var guid = id;
    

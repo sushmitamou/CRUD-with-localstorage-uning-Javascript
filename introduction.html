@@ -30,22 +30,7 @@
 
 
   <body>    
-        <!-- <div w3-include-html="header.html"></div> -->
-    <div class="navbar">
-        <div class="background"></div>
-            <div class="primary">
-                <img src="image/hand.png" alt="logo" style="height: 50px; width: 130px;">
-            </div>
-            <div class="secondary">
-              <ul>
-                <li><a href="index.html" id="home" onselect="home()";>Home</a></li>
-                <li><a href="info.html" id="info" onchange="info()"; >Members-Info</a></li>
-                <li><a href="introduction.html" id="about" onchange="intro()";>Introduction</a></li>
-                <li><a href="about.html" id="about" onchange="about()";>About</a></li>
-              </ul>
-            </div>
-        </div>
-    </div>
+    <div data-include-html="nav.html"></div>
     
     <div class="container">
         <h3 class="title"> SMALL <span>INTRODUCTION</span> ABOUT OUR <span>TEAM</span> MEMBERS </h3>
@@ -55,50 +40,8 @@
 
         <!-- bootstrap card -->
         <div  id="allCards" class="allCards">
-            <!-- <div id="single-card" class="single-card">
-
-                <div class="image">
-                    <img class="card-img-top" src="image/about-me.jpg" alt="Card image cap">
-                </div>  
-                  <div class="card-body">
-                    <h4 class="fullname" id="fullname">$ <span></span></h4>
-                    <p class="occupation" ><i class="fa fa-briefcase" aria-hidden="true"></i><span></span></p>
-                    <p class="email"><i class="fas fa-envelope-square"></i><span></span></p>
-                    <p class="age"><i class="fa fa-child" aria-hidden="true"></i><span></span></p>
-                </div>
-            </div> -->
+            
         </div>
-        <!-- bootstrap card -->
-        <!-- <div class="card-warpper">
-            <div class="row">
-                <div class="col-3">
-                    <div class="card">
-                        <div class="pro-image">
-                            <img src="image/about-me.jpg" alt="">
-                        </div>
-                        <h4 class="fullname">Sushmita Paul</h4>
-                        <p class="occupation">Softwar Engineer</p>
-                        <p class="email">psushmita87@gmail.com</p>
-                        <p class="age">Age : 24</p>
-                        <p class="about">I am a slow lerner...but i want to know more & more about programming</p>
-                    </div>
-                </div>
-                <div class="col">col</div>
-                <div class="col">col</div>
-                <div class="col">col</div>
-              </div>
-
-              <div class="card">
-                <div class="pro-image">
-                    <img src="image/about-me.jpg" alt="">
-                </div>
-                <h4 class="fullname">Sushmita Paul</h4>
-                <p class="occupation">Softwar Engineer</p>
-                <p class="email">psushmita87@gmail.com</p>
-                <p class="age">Age : 24</p>
-                <p class="about">I am a slow lerner...but i want to know more & more about programming</p>
-            </div> 
-        </div> -->
     </div>
         
 
@@ -162,26 +105,25 @@
                       <div class="form-control">
                         <label for="">Fullname <span>*</span></label>
                         <input type="text" class="task" 
-                        id="view_fullname" placeholder="Enter your fullname" required/>              
+                        id="view_fullname" placeholder="Enter your fullname" required disabled/>              
                       </div>
           
                       <div class="form-control">
                         <label for="">Email <span>*</span></label>
-                        <input type="text" class="task" id="view_email" placeholder="Enter email" required/>                            
+                        <input type="text" class="task" id="view_email" placeholder="Enter email" required disabled/>                            
                       </div>
           
                       <div class="form-control">
                         <label for="">Date Of Birth <span>*</span> </label>
-                        <input type="text" class="task" id="view_age" placeholder="Enter Date of birth" required/>                 
+                        <input type="text" class="task" id="view_age" placeholder="Enter Date of birth" required disabled/>                 
                       </div>
           
                       <div class="form-control">
                         <label for="">Designation <span>*</span></label>
-                        <input type="text" class="task" id="view_designation" placeholder="Enter designation" required/>
+                        <input type="text" class="task" id="view_designation" placeholder="Enter designation" required disabled/>
                       </div>
 
                       <div class="form-control">
-                        <button type="submit" id="create-btn" class="btn btn-primary">Create</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                       </div> 
                   </form>
@@ -336,13 +278,15 @@
               </div>
             </div>
         </div>
-    </div>
+      </div>
     <!-- clear modal -->
     
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/introduction.js"></script>
+    <script src="js/active.js"></script>
+    <script src="js/in.js"></script>
+
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

@@ -8,6 +8,13 @@ body {
     margin: 0;
   }
 
+.mobile-nav-icon{
+  display: none;
+}
+.close{
+  display: none;
+}
+
 .title{
     color: rgb(25, 80, 168);
     margin: 4% 17%;
@@ -88,8 +95,13 @@ label.validation-error{
   width: 100%;
   background: linear-gradient(rgb(44, 110, 252), rgba(63, 126, 243, 0.8));
 }
+
+.pos-f-t{
+  display: none;
+}
+
 .primary{
-  margin-left: -35%;
+  margin-left: 5.5%;
 }
 .secondary ul{
   margin-left: -25%;
@@ -97,8 +109,8 @@ label.validation-error{
 }
 .primary img{
   background: transparent;
-  height: 50px;
-  width: 130px;
+  height: 50px !important;
+  width: 130px !important;
 }
 .secondary ul{
   display: flex;
@@ -258,6 +270,31 @@ label.validation-error{
 }
 
 @media only screen and (max-width: 767px){
+  .secondary ul {
+    display: none;
+  }
+  .secondary ul li{
+    display: flex;
+    flex-direction: column;
+  }
+  .secondary ul li a{
+    display: block;
+  }
+  .mobile-nav-icon{
+    display: flex;
+    margin-right: 8%;
+  }
+  .close{
+    display: none;
+    margin-right: 20%;
+  }
+  .close .fa-times{
+    color: #fff;
+  }
+  .mobile-nav-icon .fa-bars{
+    color: #fff;
+    font-size: 26px;
+  }
   .primary img{
     margin-left: 80% !important;
   }
@@ -267,8 +304,7 @@ label.validation-error{
     font-size: 25px;
   }
   .allCards{
-    margin: 5% 10%;
-
+    margin: 5% 10%; 
   }
   .allCards .single-card{
     width: 400px !important;
@@ -279,5 +315,83 @@ label.validation-error{
     margin-top: 2%;
     font-size: 16px;
     margin-left: 12%;
+  }
+}
+
+@media only screen and (max-width: 425px){
+  .navbar img{
+    height: 30px !important;
+    width: 60px !important;
+  }
+  #navsection{
+    display: none;
+  }
+  .pos-f-t{
+    display:  flex;
+    flex-direction: column;
+    width: 100% !important;
+  }
+  .navbar-dark button{
+    float: right !important;
+    font-size: 15px !important;
+    color: #fff !important;
+    font-weight: bold !important;
+  }
+  .collapse{
+    width: 100% !important;
+  }
+  .p-4{
+    background: linear-gradient(rgb(44, 110, 252), rgba(63, 126, 243, 0.8))
+  }
+  ul{
+    margin-left: -8%;
+  }
+  ul li{
+    list-style: none;
+  }
+  ul li a{
+    color: #fff;
+    text-decoration: none;
+  }
+  .navbar-dark{
+    float: right !important;
+
+  }
+  .title{
+    font-size: 17px;
+    margin: 3% 1% 5% 1%;
+
+    text-align: center;
+
+  }
+  .allCards .single-card{
+    width: 310px !important;
+    margin: 5% 1% !important;
+  }
+  .single-card .fullname{
+    margin-top: 1.5% !important;
+    font-size: 20px;
+    margin-bottom: 7% !important;
+  }
+  .single-card p{
+    font-size: medium;
+  }
+
+}
+
+@media only screen and (max-width: 375px){
+  .allCards .single-card{
+    width: 330px !important;
+    margin: 5% -8% !important;
+  }
+ 
+}
+@media only screen and (max-width: 320px){
+  .allCards .single-card{
+    width: 280px !important;
+    margin: 5% -8% !important;
+  }
+  .single-card button{
+    margin-left: 9% !important;
   }
 }
