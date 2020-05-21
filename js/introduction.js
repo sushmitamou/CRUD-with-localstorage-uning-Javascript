@@ -78,150 +78,18 @@ function loadEventListeners(){
 }
 
 
-
-function filterTask() {
-    $("#table").find("tr:not(:first)").remove(); 
-
-    var searchKeyword = $('#member_search').val();
-
-    var tasks2;
-    
-    if(localStorage.getItem('tasks2') === null){
-        tasks2 = [] ;
-    }
-    else{
-        tasks2 = JSON.parse(localStorage.getItem('tasks2'));  
-    }
-
-    var filteredMembers = tasks2.filter(function (item, index){
-    return  item.fullname.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-            item.email.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-            item.designation.toLowerCase().includes(searchKeyword.toLowerCase())
-    });
-
-    if (!filteredMembers.length) {
-        $('.show-table-info').removeClass('hide');
-    } else {
-        $('.show-table-info').addClass('hide');
-    }
-    console.log(filteredMembers);
-    
-
-
-    filteredMembers.forEach(function (item, index) {
-
-        newRow= table.insertRow(table.length);
-        cell1 = newRow.insertCell(0);
-        cell2 = newRow.insertCell(1);
-        cell3 = newRow.insertCell(2);
-        cell4 = newRow.insertCell(3);
-        cell5 = newRow.insertCell(4);
-        cell6 = newRow.insertCell(5);
-        cell7 = newRow.insertCell(6);
-
-        cell1.innerHTML = '<input type="checkbox" class="check" id="child">';
-        cell2.innerHTML = index+1;
-        cell3.innerHTML = item.fullname;
-        cell4.innerHTML = item.email;
-        cell5.innerHTML = item.age;
-        cell6.innerHTML = item.designation; 
-        var guid = item.id;
-        cell7.innerHTML ='<button class="btn btn-sm btn-light" style="margin-right:5px" onclick="viewModal('+ guid +');">View</button> ' +
-                '<button class="btn btn-sm btn-primary" onclick="editModal(' + guid + ')">Edit</button> ' +
-                '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')">Clone</button> ' +
-                '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')">Delete</button>';
-            
-    })
-}
-
 function addTask(){                  
-    var allCard = document.getElementById('allCards');
-    var singleCard = document.createElement('div');
-    singleCard.className = 'single-card';
-    
-    var fullname = document.createElement('h4');
-    fullname.className = 'fullname';
-    fullname.appendChild(document.createTextNode(document.getElementById('fullname').value));
-   
-    var occupation = document.createElement('p');
-    occupation.className = 'occupation';
-    var icon = document.createElement('i');
-    icon.className = 'fa fa-briefcase';
-    occupation.appendChild(icon);
-    occupation.appendChild(document.createTextNode(designation.value));
-    
-
-    var age = document.createElement('p');
-    age.className = 'age';
-    var icon = document.createElement('i');
-    icon.className = 'fa fa-child';
-    age.appendChild(icon);
-    age.appendChild(document.createTextNode(document.getElementById('age').value));
-
-    var email = document.createElement('p');
-    email.className = 'email';
-    var icon = document.createElement('i');
-    icon.className = "fa fa-envelope-square";
-    email.appendChild(icon);
-    email.appendChild(document.createTextNode(document.getElementById('email').value));
-
-    // button view, edit, clone, delete
-    var view = document.createElement('button');
-    view.className = "buttons";
-    var icon = document.createElement('i');
-    icon.className = "fa fa-eye";
-    view.style.display = 'flex';
-    view.style.color = '#fff';
-    view.appendChild(icon);
-
-    var edit = document.createElement('button');
-    edit.className = "buttons";
-    var icon = document.createElement('i');
-    icon.className = "fa fa-user-edit";
-    edit.appendChild(icon);
-
-    var clone = document.createElement('button');
-    clone.className = "buttons";
-    var icon = document.createElement('i');
-    icon.className = "fa fa-copy";
-    clone.appendChild(icon);
-
-    var remove = document.createElement('button');
-    remove.className = "btn btn-sm btn-danger";
-    var icon = document.createElement('i');
-    icon.className = "fa fa-trash";
-    remove.appendChild(icon);
-
-   // button view, edit, clone, delete
-
-    // var buttons =  '<button class="btn btn-sm btn-info" style="margin-right:5px" onclick="viewModal('+ guid +');"><i class="fas fa-eye"></i></button> ' +
-    //     '<button class="btn btn-sm btn-primary" onclick="editModal(' + guid + ')"><i class="far fa-user-edit"></i></button> ' +
-    //     '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')"><i class="far fa-copy"></i></button> ' +
-    //     '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')"><i class="far fa-trash"></i></button>';
-
-
-    singleCard.appendChild(fullname);
-    singleCard.appendChild(occupation);
-    singleCard.appendChild(age);
-    singleCard.appendChild(email);
-    singleCard.appendChild(view);
-    singleCard.appendChild(edit);
-    singleCard.appendChild(clone);
-    singleCard.appendChild(remove);
-    allCard.appendChild(singleCard);
    
    var obj = {   
-        fullname   : document.getElementById('fullname').value,
-        designation : designation.value,
-        age        : document.getElementById('age').value,
-        email      : document.getElementById('email').value,
-               
+        fullname    : document.getElementById('fullname').value,
+        designation : document.getElementById('designation').value,
+        age         : document.getElementById('age').value,
+        email       : document.getElementById('email').value,              
     };
-    
-    //console.log(obj);
     
     addDataInLocalStorage(obj);
     clearForm();
+    getTasks();
     $('#member-form-modal').modal('hide')
 }
 
@@ -234,34 +102,34 @@ function getTotalRowOfTable() {
 //store data in local storage
 function addDataInLocalStorage(newTask){
     
-    var tasks2;
+    var allMembers;
 
-    if(localStorage.getItem('tasks2') === null){
-        tasks2 = [] ;
+    if(localStorage.getItem('allMembers') === null){
+        allMembers = [] ;
     }
     else{
-        tasks2 = JSON.parse(localStorage.getItem('tasks2'));  
+        allMembers = JSON.parse(localStorage.getItem('allMembers'));  
     }
 
     newTask.id = guid();
-    tasks2.push(newTask);
-    localStorage.setItem('tasks2', JSON.stringify(tasks2));
+    allMembers.push(newTask);
+    localStorage.setItem('allMembers', JSON.stringify(allMembers));
 }
 
 function getTasks(){
 
-    var tasks2;
+    var allMembers;
 
-    if(localStorage.getItem('tasks2') === null){
-        tasks2 = [] ;
+    if(localStorage.getItem('allMembers') === null){
+        allMembers = [] ;
     }
     else{
-        tasks2 = JSON.parse(localStorage.getItem('tasks2'));  
+        allMembers = JSON.parse(localStorage.getItem('allMembers'));  
     }
 
 
     //data not found message with show data from LS
-    if (!tasks2.length) {
+    if (!allMembers.length) {
         $('.show-table-info').removeClass('hide');
     } 
     else {
@@ -270,7 +138,7 @@ function getTasks(){
         // Clear previous data
         $("#allCards").find(".single-card").remove();
 
-        tasks2.forEach(function(obj,index) {
+        allMembers.forEach(function(obj,index) {
 
             var allCard = document.getElementById('allCards');
             var singleCard = document.createElement('div');
@@ -351,11 +219,6 @@ function getTasks(){
             singleCard.appendChild(clone);
             singleCard.appendChild(remove);
             allCard.appendChild(singleCard); 
-        // var guid = obj.id;  
-        // cell8.innerHTML = '<button class="btn btn-sm btn-info" style="margin-right:5px" onclick="viewModal('+ guid +');">View</button>' +
-        // '<button class="btn btn-sm btn-primary" onclick="editModal('+ guid +')" >Edit</button> ' +
-        // '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')">Clone</button> ' +
-        // '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')">Delete</button>';   
     
     });
 }
@@ -371,7 +234,7 @@ function showDeleteModal(id) {
 function deleteMemberData() {
 
     var id = deleteId.value;
-    var data = localStorage.getItem('tasks2');
+    var data = localStorage.getItem('allMembers');
     var storageUsers = JSON.parse(data);
 
     var newData = [];
@@ -382,7 +245,7 @@ function deleteMemberData() {
 
     var data = JSON.stringify(newData);
 
-    localStorage.setItem('tasks2', data);
+    localStorage.setItem('allMembers', data);
     $("#table").find("tr:not(:first)").remove();
     $('#deleteDialog').modal('hide');
     getTasks();
@@ -397,7 +260,6 @@ function clearForm(){
     document.getElementById("age").value = "";
     document.getElementById("designation").value = "";
 
-    var selectedRow = null;
 }
 
 
@@ -415,16 +277,16 @@ function alterButtons(createBtn, editBtn) {
 
 function viewModal(id){
 
-    var tasks2;
+    var allMembers;
 
-    if(localStorage.getItem('tasks2') === null){
-        tasks2 = [] ;
+    if(localStorage.getItem('allMembers') === null){
+        allMembers = [] ;
     }
     else{
-        tasks2 = JSON.parse(localStorage.getItem('tasks2'));  
+        allMembers = JSON.parse(localStorage.getItem('allMembers'));  
     }
     
-    var member = tasks2.find(function (item) {
+    var member = allMembers.find(function (item) {
         return item.id == id;
     })
 
@@ -438,15 +300,15 @@ function viewModal(id){
 
 function editModal(id) {
 
-    var tasks2;
-    if(localStorage.getItem('tasks2') === null){
-        tasks2 = [] ;
+    var allMembers;
+    if(localStorage.getItem('allMembers') === null){
+        allMembers = [] ;
     }
     else{
-        tasks2 = JSON.parse(localStorage.getItem('tasks2'));  
+        allMembers = JSON.parse(localStorage.getItem('allMembers'));  
     }
     
-    var member = tasks2.find(function (item) {
+    var member = allMembers.find(function (item) {
         return item.id == id;
     })
 
@@ -460,16 +322,16 @@ function editModal(id) {
 }
 
 function updateInfo(){
-    var tasks2;
-    if(localStorage.getItem('tasks2') === null){
-        tasks2 = [] ;
+    var allMembers;
+    if(localStorage.getItem('allMembers') === null){
+        allMembers = [] ;
     }
     else{
-        tasks2 = JSON.parse(localStorage.getItem('tasks2'));  
+        allMembers = JSON.parse(localStorage.getItem('allMembers'));  
     }
     var id = $('#member_id').val();
     
-    var member = tasks2.find(function (item) {
+    var member = allMembers.find(function (item) {
         return item.id == id;
     })
     member.fullname = edit_fullname.value;
@@ -477,8 +339,8 @@ function updateInfo(){
     member.age = edit_age.value;
     member.designation =  edit_designation.value;
 
-    var data = JSON.stringify(tasks2);
-    localStorage.setItem("tasks2", data);
+    var data = JSON.stringify(allMembers);
+    localStorage.setItem("allMembers", data);
 
     $("#table").find("tr:not(:first)").remove();
     getTasks();
@@ -487,15 +349,15 @@ function updateInfo(){
 
 function cloneModal(id){
 
-    var tasks2;
-    if(localStorage.getItem('tasks2') === null){
-        tasks2 = [] ;
+    var allMembers;
+    if(localStorage.getItem('allMembers') === null){
+        allMembers = [] ;
     }
     else{
-        tasks2 = JSON.parse(localStorage.getItem('tasks2'));  
+        allMembers = JSON.parse(localStorage.getItem('allMembers'));  
     }
     
-    var member = tasks2.find(function (item) {
+    var member = allMembers.find(function (item) {
         return item.id == id;
     })
 
@@ -509,141 +371,30 @@ function cloneModal(id){
 }
 
 function cloneInfo() {
-    var tasks2;
-    if(localStorage.getItem('tasks2') === null){
-        tasks2 = [] ;
+    var allMembers;
+    if(localStorage.getItem('allMembers') === null){
+        allMembers = [] ;
     }
     else{
-        tasks2 = JSON.parse(localStorage.getItem('tasks2'));  
+        allMembers = JSON.parse(localStorage.getItem('allMembers'));  
     }
-    var id = $('#clone_member_id').val();
     
-    var allCard = document.getElementById('allCards');
-    var singleCard = document.createElement('div');
-    singleCard.className = 'single-card';
+    var obj = {   
+        fullname   : clone_fullname.value,
+        designation: clone_designation.value,
+        age        : clone_age.value,    
+        email      : clone_email.value,  
+    };
+  
+    addDataInLocalStorage(obj);
+    clearForm();
+    getTasks();
     
-    var fullname = document.createElement('h4');
-    fullname.className = 'fullname';
-    fullname.appendChild(document.createTextNode(document.getElementById('clone_fullname').value));
-   
-    var occupation = document.createElement('p');
-    occupation.className = 'occupation';
-    var icon = document.createElement('i');
-    icon.className = 'fa fa-briefcase';
-    occupation.appendChild(icon);
-    occupation.appendChild(document.createTextNode(document.getElementById('clone_designation').value));
-    
-
-    var age = document.createElement('p');
-    age.className = 'age';
-    var icon = document.createElement('i');
-    icon.className = 'fa fa-child';
-    age.appendChild(icon);
-    age.appendChild(document.createTextNode(document.getElementById('clone_age').value));
-
-    var email = document.createElement('p');
-    email.className = 'email';
-    var icon = document.createElement('i');
-    icon.className = "fa fa-envelope-square";
-    email.appendChild(icon);
-    email.appendChild(document.createTextNode(document.getElementById('clone_email').value));
-   
-            var view = document.createElement('button');
-            view.className = "buttons";
-
-            var icon = document.createElement('i');
-            icon.className = "fa fa-eye";
-            view.style.display = 'flex';
-            view.style.color = '#fff';
-            view.appendChild(icon);
-
-            var edit = document.createElement('button');
-            edit.className = "buttons";
-            var icon = document.createElement('i');
-            icon.className = "fa fa-user-edit";
-            edit.appendChild(icon);
-
-            var clone = document.createElement('button');
-            clone.className = "buttons";
-            var icon = document.createElement('i');
-            icon.className = "fa fa-copy";
-            clone.appendChild(icon);
-
-            var remove = document.createElement('button');
-            remove.className = "btn btn-sm btn-danger";
-            var icon = document.createElement('i');
-            icon.className = "fa fa-trash";
-            remove.appendChild(icon);
-
-
-    singleCard.appendChild(fullname);
-    singleCard.appendChild(occupation);
-    singleCard.appendChild(age);
-    singleCard.appendChild(email);
-    singleCard.appendChild(view);
-    singleCard.appendChild(edit);
-    singleCard.appendChild(clone);
-    singleCard.appendChild(remove);
-    allCard.appendChild(singleCard);
-    // var guid = id;
-   
-    // cell8.innerHTML ='<button class="btn btn-sm btn-info" style="margin-right:5px" onclick="viewModal('+ guid +');">View</button> ' +
-    //       '<button class="btn btn-sm btn-primary" onclick="editModal(' + guid + ')">Edit</button> ' +
-    //       '<button class="btn btn-sm btn-success" onclick="cloneModal(' + guid + ')">Clone</button> ' +
-    //       '<button class="btn btn-sm btn-danger" onclick="showDeleteModal(' + guid + ')">Delete</button>';
-     
-     var obj = {   
-          fullname  : clone_fullname.value,
-          designation: clone_designation.value,
-          age        : clone_age.value,    
-          email      : clone_email.value,  
-      };
-    
-      addDataInLocalStorage(obj);
-      clearForm();
-      
     $('#clonemodal').modal('hide');
-}
 
-
-function SelectAll(){
-    var parent = document.getElementById('parent');
-    var input = document.getElementsByTagName('input');
-
-    if(parent.checked === true){
-        for (var i = 0; i<input.length; i++){
-            if(input[i].type == "checkbox" && input[i].checked == false && input[i].id == "child"){
-                input[i].checked = true;
-            }
-        }
-    }
-
-    if(parent.checked === false){
-        for (var i = 0; i<input.length; i++){
-            if(input[i].type == "checkbox" && input[i].checked == true && input[i].id == "child"){
-                input[i].checked = false;
-            }
-        }
-    }
-}
-
-
-function showSelectedRows(id) {
-    $('#clear-member-id').val(id);
-    
-    //$('#table input:checked').val(id);
-    //debugger;
-    $('#clearDialog').modal();  
-}
-function deleteSelectedRow(){
-    var check = document.getElementsByClassName('check');
-    var data = localStorage.getItem('tasks2');
-    var storageUsers = JSON.parse(data);
-    var newData = [];
-    newData = storageUsers.filter(function (element, index) {
-        return element.id != id;
-    });
-    console.log(newData);
-    debugger;
    
 }
+
+
+
+

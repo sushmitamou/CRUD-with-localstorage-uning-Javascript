@@ -377,6 +377,15 @@ label.validation-error{
     font-size: medium;
   }
 
+  .modal{
+    width: 90% !important;
+    margin-left: 2.5%;
+    margin-top: 5% ;
+    height: 480px !important;
+  }
+  .modal-title{
+    font-size: 20px;
+  }
 }
 
 @media only screen and (max-width: 375px){
@@ -393,5 +402,14 @@ label.validation-error{
   }
   .single-card button{
     margin-left: 9% !important;
+  }
+  .modal{
+    width: 95% !important;
+    justify-content: center !important;
+    margin-top: 10%;
+    margin-left: -0.7% !important;
+  }
+  .modal-title{
+    font-size: 18px;
   }
 }
